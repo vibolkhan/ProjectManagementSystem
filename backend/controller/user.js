@@ -65,7 +65,7 @@ async function login (req, res) {
     if (user.length > 0) {
       if (await verifyPassword(req.body.password,user)) {
         const token = jwt.sign({
-          data: 'foobar'
+          data: 'pms'
         }, 'secret', { expiresIn: '24h' });
 
         const loginView = {
@@ -87,4 +87,18 @@ async function verifyPassword(password, user) {
   }
 }
 
-module.exports = {createUser, getAlluser, deleteUser, updateUser, login}
+// logout
+async function logout(req, res) {
+    try{
+        let randomNumberToAppend = toString(Math.floor((Math.random() * 1000) + 1));
+        let randomIndex = Math.floor((Math.random() * 10) + 1);
+        let hashedRandomNumberToAppend = await bcrypt.hash(randomNumberToAppend, 10);
+    
+        // now just concat the hashed random number to the end of the token
+        req.token = req.token + hashedRandomNumberToAppend;
+        return res.status(200).json('logout');
+    }catch(err){
+        return res.status(500).json(err.message);
+    }
+}
+module.exports = {createUser, getAlluser, deleteUser, updateUser, login, logout}

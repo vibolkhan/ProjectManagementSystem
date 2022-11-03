@@ -11,4 +11,7 @@ router.delete('/:id', vertifyToken, userController.deleteUser)
 // login 
 router.post('/login', userController.login)
 
+// logout
+router.post('/logout', vertifyToken, userController.logout)
+
 module.exports = router
