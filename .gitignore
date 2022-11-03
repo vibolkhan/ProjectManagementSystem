@@ -1,0 +1,32 @@
+/frontend/.DS_Store
+
+# NPM package repo
+/frontend/node_modules
+/frontend/package-lock.json
+
+# Generated distribution
+/frontend/dist
+
+# Local env files
+/frontend/.env.local
+/frontend/.env.*.local
+
+# Log files
+/frontend/npm-debug.log*
+ 
+# Editor configuration
+/frontend/.vscode
+
+
+# BACKend : NPM package repo
+/backend/node_modules
+/backend/package-lock.json
+
+# Backend : Enviroment Variable file
+/backend/.env
+
+# Backend : Enviroment Variable file backendup
+/backend/.env.backendup
+
+# Backend : vscode 
+/backend/.vscode
