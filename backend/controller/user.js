@@ -1,4 +1,6 @@
 const userTable = require('../config/model/user')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 // create user
 async function createUser(req, res) {
@@ -13,7 +15,11 @@ async function createUser(req, res) {
 // get user
 async function getAlluser(req, res) {
     try {
-        const data = await userTable.findAll()
+        const data = await userTable.findAll({
+            attributes: {
+                exclude: ['password']
+            }
+        })
         res.send(data)
     } catch (err) {
         res.status(404).json({msg: "Cannot get data"})
@@ -48,4 +54,37 @@ async function deleteUser(req, res) {
     }
 }
 
-module.exports = {createUser, getAlluser, deleteUser, updateUser}
+// login
+async function login (req, res) {
+    // check if user exists by email
+    const user = await userTable.findAll({
+        where: {
+            email: req.body.email,
+        },
+    })
+    if (user.length > 0) {
+      if (await verifyPassword(req.body.password,user)) {
+        const token = jwt.sign({
+          data: 'foobar'
+        }, 'secret', { expiresIn: '24h' });
+
+        const loginView = {
+          user,
+          token
+        }
+        res.send(loginView)
+      } else {
+        res.send("error", 401)
+      }
+    } else {
+      res.send("error", 401)
+    }
+}
+
+async function verifyPassword(password, user) {
+  if (user.length > 0) {
+    return await bcrypt.compare(password, user[0].dataValues.password)
+  }
+}
+
+module.exports = {createUser, getAlluser, deleteUser, updateUser, login}
