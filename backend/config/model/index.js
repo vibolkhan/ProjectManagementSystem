@@ -9,10 +9,10 @@ database.authenticate()
     console.log('Error'+ err)
 })
 
-const db = {}
+// const db = {}
 
-db.sequelize = Sequelize
-db.database = database
+// db.sequelize = Sequelize
+// db.database = database
 
 const project = require('./core/project')//(database, DataTypes)
 const task = require('./core/task')//(database, DataTypes)
@@ -107,4 +107,11 @@ project.sync()
 task.sync()
 userTask.sync()
 userProject.sync()
-module.exports = db
+module.exports = {
+    status, 
+    user, 
+    project,
+    task,
+    userTask,
+    userProject
+}

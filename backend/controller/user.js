@@ -99,7 +99,7 @@ async function logout(req, res) {
         req.token = req.token + hashedRandomNumberToAppend;
         return res.status(200).json('logout');
     }catch(err){
-        return res.status(500).json(err.message);
+        return res.status(500).json(err.message); 
     }
 }
 module.exports = {createUser, getAlluser, deleteUser, updateUser, login, logout}

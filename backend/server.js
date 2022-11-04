@@ -24,7 +24,7 @@ app.use('/status', statusRoute)
 app.use('/project', projectRoute)
 app.use('/task', taskRoute)
 app.use('/userProject', userProjectRoute)
-app.use('/userProject', userTaskRoute)
+app.use('/userTask', userTaskRoute)
 app.listen(port, () => {
   console.log(`server starts at http://localhost:${port}`);
 });

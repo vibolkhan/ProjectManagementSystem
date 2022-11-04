@@ -1,6 +1,5 @@
 const db = require('../config/model/index')
-const statusTable =  db.status
-// create user
+const statusTable = db.status
 async function createStatus(req, res) {
     try {
         const data = await statusTable.create(req.body)
@@ -9,14 +8,16 @@ async function createStatus(req, res) {
         res.status(404).json({msg: "Cannot create data"})
     }
 }
-    
+
 // get Status
 async function getAllStatus(req, res) {
     try {
+        console.log(statusTable)
         const data = await statusTable.findAll()
         res.send(data)
     } catch (err) {
-        res.status(404).json({msg: "Cannot get data"})
+        console.log(err)
+        res.status(404).json({msg: err})
     }
 }
 
