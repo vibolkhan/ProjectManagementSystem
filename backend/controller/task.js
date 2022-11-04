@@ -1,29 +1,29 @@
 const db = require('../config/model/index')
-const userTable =  db.user
+const taskTable =  db.task
 // create user
-async function createUser(req, res) {
+async function createTask(req, res) {
     try {
-        const data = await userTable.create(req.body)
+        const data = await taskTable.create(req.body)
         res.send(data)
     } catch (err) {
         res.status(404).json({msg: "Cannot create data"})
     }
 }
     
-// get user
-async function getAlluser(req, res) {
+// get Status
+async function getAllTask(req, res) {
     try {
-        const data = await userTable.findAll()
+        const data = await taskTable.findAll()
         res.send(data)
     } catch (err) {
         res.status(404).json({msg: "Cannot get data"})
     }
 }
 
-// update user
-async function updateUser(req, res) {
+// update Status
+async function updateTask(req, res) {
     try {
-        const data = await userTable.update({
+        const data = await taskTable.update({
             where: {
               id: req.params.id,
             },
@@ -34,10 +34,10 @@ async function updateUser(req, res) {
     }
 }
 
-// delete user
-async function deleteUser(req, res) {
+// delete Status
+async function deleteTask(req, res) {
     try {
-        await userTable.destroy({
+        await taskTable.destroy({
             where: {
               id: req.params.id,
             },
@@ -47,4 +47,5 @@ async function deleteUser(req, res) {
         res.status(404).json({msg: "Cannot delete data"})
     }
 }
-module.exports = {createUser, getAlluser, deleteUser, updateUser}
+
+module.exports = {createTask, getAllTask, deleteTask, updateTask}

@@ -1,19 +1,19 @@
 const db = require('../config/model/index')
-const userTable =  db.user
+const userProjectTable =  db.user
 // create user
-async function createUser(req, res) {
+async function createUserProject(req, res) {
     try {
-        const data = await userTable.create(req.body)
+        const data = await userProjectTable.create(req.body)
         res.send(data)
     } catch (err) {
         res.status(404).json({msg: "Cannot create data"})
     }
 }
-    
+
 // get user
-async function getAlluser(req, res) {
+async function getAllUserProject(req, res) {
     try {
-        const data = await userTable.findAll()
+        const data = await userProjectTable.findAll()
         res.send(data)
     } catch (err) {
         res.status(404).json({msg: "Cannot get data"})
@@ -21,9 +21,9 @@ async function getAlluser(req, res) {
 }
 
 // update user
-async function updateUser(req, res) {
+async function updateUserProject(req, res) {
     try {
-        const data = await userTable.update({
+        const data = await userProjectTable.update({
             where: {
               id: req.params.id,
             },
@@ -35,9 +35,9 @@ async function updateUser(req, res) {
 }
 
 // delete user
-async function deleteUser(req, res) {
+async function deleteUserProject(req, res) {
     try {
-        await userTable.destroy({
+        await userProjectTable.destroy({
             where: {
               id: req.params.id,
             },
@@ -47,4 +47,4 @@ async function deleteUser(req, res) {
         res.status(404).json({msg: "Cannot delete data"})
     }
 }
-module.exports = {createUser, getAlluser, deleteUser, updateUser}
+module.exports = {createUserProject, getAllUserProject, deleteUserProject, updateUserProject}
