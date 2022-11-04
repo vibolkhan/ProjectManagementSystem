@@ -9,13 +9,22 @@ app.use(cors('*')); // To allow any origin
 const port = process.env.PORT;
 
 const userRoute = require('./routes/user')
+const statusRoute = require('./routes/status')
+const projectRoute = require('./routes/project')
+const taskRoute = require('./routes/task')
+const userProjectRoute = require('./routes/userProject')
+const userTaskRoute = require('./routes/userTask')
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/user', userRoute)
-
+app.use('/status', statusRoute)
+app.use('/project', projectRoute)
+app.use('/task', taskRoute)
+app.use('/userProject', userProjectRoute)
+app.use('/userTask', userTaskRoute)
 app.listen(port, () => {
   console.log(`server starts at http://localhost:${port}`);
 });
