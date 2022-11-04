@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const vertifyToken = require('./controller/auth')
 
 require("dotenv").config();
 
@@ -14,12 +15,13 @@ const projectRoute = require('./routes/project')
 const taskRoute = require('./routes/task')
 const userProjectRoute = require('./routes/userProject')
 const userTaskRoute = require('./routes/userTask')
-
+const authRoute = require('./routes/auth')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/user', userRoute)
+app.use('/auth', authRoute)
+app.use('/user', vertifyToken, userRoute)
 app.use('/status', statusRoute)
 app.use('/project', projectRoute)
 app.use('/task', taskRoute)
