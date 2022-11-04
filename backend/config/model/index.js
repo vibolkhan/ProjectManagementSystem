@@ -101,8 +101,8 @@ project.belongsToMany(user, { through: 'user_project' });
 user.belongsToMany(task, { through: 'user_task' });
 task.belongsToMany(user, { through: 'user_task' });
 
-status.sync()
 user.sync()
+status.sync()
 project.sync()
 task.sync()
 userTask.sync()

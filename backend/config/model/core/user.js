@@ -42,6 +42,6 @@ userTable.beforeCreate((user, options) => {
     })
     .catch((err) => {
       throw new Error();
-    });
+    }); 
 });
 module.exports = userTable;

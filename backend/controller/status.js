@@ -5,18 +5,16 @@ async function createStatus(req, res) {
         const data = await statusTable.create(req.body)
         res.send(data)
     } catch (err) {
-        res.status(404).json({msg: "Cannot create data"})
+        res.status(404).json({msg: err})
     }
 }
 
 // get Status
 async function getAllStatus(req, res) {
     try {
-        console.log(statusTable)
         const data = await statusTable.findAll()
         res.send(data)
     } catch (err) {
-        console.log(err)
         res.status(404).json({msg: err})
     }
 }
