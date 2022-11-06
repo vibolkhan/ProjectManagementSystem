@@ -20,6 +20,7 @@ const status = require('./core/status'); //(database, DataTypes)
 const user = require('./core/user');
 const userProject = require('./core/userProject'); //
 const userTask = require('./core/userTask');
+const comment = require('./core/comment');
 // relation between project and status
 status.hasOne(project, {
      foreignKey:{
@@ -93,6 +94,42 @@ task.belongsTo(project, {
     as: 'project',
 })
 
+// relation between task and and comment
+task.hasMany(comment, {
+    foreignKey:{
+       name: 'taskId',
+       allowNull: false
+   },
+   onDelete: 'CASCADE',
+   as: 'comment',
+})
+comment.belongsTo(task, {
+    foreignKey:{
+       name: 'taskId',
+       allowNull: false
+   },
+   onDelete: 'CASCADE',
+   as: 'task',
+})
+
+// relation between user and and comment
+user.hasMany(comment, {
+    foreignKey:{
+       name: 'userId',
+       allowNull: false
+   },
+   onDelete: 'CASCADE',
+   as: 'comment',
+})
+comment.belongsTo(user, {
+    foreignKey:{
+       name: 'userId',
+       allowNull: false
+   },
+   onDelete: 'CASCADE',
+   as: 'user',
+})
+
 // relation between user with project
 user.belongsToMany(project, { through: 'user_project' });
 project.belongsToMany(user, { through: 'user_project' });
@@ -107,11 +144,13 @@ project.sync()
 task.sync()
 userTask.sync()
 userProject.sync()
+comment.sync()
 module.exports = {
     status, 
     user, 
     project,
     task,
     userTask,
-    userProject
+    userProject,
+    comment,
 }
