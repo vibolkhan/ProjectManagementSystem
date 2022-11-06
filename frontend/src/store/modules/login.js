@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-const URL = 'http://localhost:5000/user/login'
+const URL = 'http://localhost:5000/auth/login'
 
 const state = {
   users: [],
